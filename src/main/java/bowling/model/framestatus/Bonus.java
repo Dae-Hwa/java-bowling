@@ -58,11 +58,12 @@ public class Bonus implements FrameStatus {
 
   @Override
   public String getResultBy(KnockedDownPins pins) {
-    if (pins.getFirstKnockDownNumber() == 10) {
+    if (pins.getFirstKnockDownNumber() == KnockedDownPins.MAX_NUMBER_OF_PINS) {
       return STRIKE.toString();
     }
 
-    return String.valueOf(pins.getFirstKnockDownNumber()).replaceAll("0", GUTTER.toString());
+    return String.valueOf(pins.getFirstKnockDownNumber())
+        .replaceAll(String.valueOf(KnockedDownPins.MIN_NUMBER_OF_PINS), GUTTER.toString());
   }
 
   @Override

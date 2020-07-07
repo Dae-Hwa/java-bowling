@@ -53,7 +53,7 @@ public class Strike implements FrameStatus {
 
   @Override
   public String getResultBy(KnockedDownPins pins) {
-    if (pins.getFirstKnockDownNumber() != 10) {
+    if (pins.getFirstKnockDownNumber() != KnockedDownPins.MAX_NUMBER_OF_PINS) {
       throw new IllegalArgumentException("스트라이크가 아닙니다.");
     }
 

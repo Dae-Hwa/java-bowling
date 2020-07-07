@@ -42,7 +42,7 @@ public class Miss implements FrameStatus {
 
   @Override
   public String getResultBy(KnockedDownPins pins) {
-    if (pins.getRemainingNumber() == 0) {
+    if (pins.getRemainingNumber() == KnockedDownPins.MIN_NUMBER_OF_PINS) {
       throw new IllegalArgumentException("미스가 아닙니다.");
     }
 

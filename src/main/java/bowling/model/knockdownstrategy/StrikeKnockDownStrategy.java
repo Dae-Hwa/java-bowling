@@ -6,7 +6,7 @@ public class StrikeKnockDownStrategy implements KnockDownStrategy {
 
   @Override
   public KnockedDownPins knockDown(int numberOfKnockedDown) {
-    if (numberOfKnockedDown != 10) {
+    if (numberOfKnockedDown != KnockedDownPins.MAX_NUMBER_OF_PINS) {
       throw new IllegalArgumentException(
           "스트라이크가 아닙니다. numberOfKnockedDown : " + numberOfKnockedDown);
     }
