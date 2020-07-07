@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Frames {
 
@@ -58,12 +59,10 @@ public class Frames {
   }
 
   public List<Score> getScores() {
-    List<Score> scores = new ArrayList<>();
-
-    frames.stream()
+    return frames.stream()
         .limit(BowlingGame.MAX_NUMBER_OF_FRAMES)
-        .forEach(frame -> scores.add(frame.getScore()));
-    return scores;
+        .map(frame -> frame.getScore())
+        .collect(Collectors.toList());
   }
 
   @Override
