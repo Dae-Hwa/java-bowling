@@ -10,6 +10,10 @@ public class Score {
     this.value = value;
   }
 
+  public static Score ofZere() {
+    return new Score(0);
+  }
+
   public void add(int value) {
     this.value += value;
   }

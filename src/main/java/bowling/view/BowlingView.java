@@ -79,7 +79,7 @@ public class BowlingView {
         .append(wrappingWithSpaces(BLANK.toString()))
         .append(BAR);
 
-    Score scoreHolder = new Score(0);
+    Score scoreHolder = Score.ofZere();
 
     scores.forEach(score -> {
       scoreHolder.add(score);

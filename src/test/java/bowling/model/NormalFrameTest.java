@@ -85,7 +85,7 @@ class NormalFrameTest {
     // 준비단계
 
     result_frame1 = frames.getFrames().get(0).getScore();
-    assertThat(result_frame1).isEqualTo(new Score(0));
+    assertThat(result_frame1).isEqualTo(Score.ofZere());
 
 //    // 1-1프레임
     frames.roll(5);
@@ -139,11 +139,11 @@ class NormalFrameTest {
   @Test
   void getScoreBy_strike() {
     Frames frames = new Frames();
-    Score result_frame1 = new Score(0);
+    Score result_frame1 = Score.ofZere();
 
     // 준비단계
     result_frame1 = frames.getFrames().get(0).getScore();
-    assertThat(result_frame1).isEqualTo(new Score(0));
+    assertThat(result_frame1).isEqualTo(Score.ofZere());
 
     // 1프레임(스트라이크)
     frames.roll(10);

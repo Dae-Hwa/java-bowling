@@ -28,7 +28,7 @@ public class BonusFrame implements Frame {
 
   @Override
   public Score getScore() {
-    return new Score(0);
+    return Score.ofZere();
   }
 
   @Override

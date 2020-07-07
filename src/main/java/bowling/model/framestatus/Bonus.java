@@ -38,7 +38,7 @@ public class Bonus implements FrameStatus {
 
   @Override
   public Score getAdditionalScore() {
-    return new Score(0);
+    return Score.ofZere();
   }
 
   @Override
