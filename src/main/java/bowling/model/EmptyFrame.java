@@ -6,12 +6,12 @@ public class EmptyFrame implements Frame {
 
   @Override
   public void roll(int KnockDownNumber) {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("Empty Frame can't use roll");
   }
 
   @Override
   public Frame next() {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("Empty Frame can't use next");
   }
 
   @Override
@@ -35,16 +35,16 @@ public class EmptyFrame implements Frame {
   }
 
   public KnockedDownPins getPins() {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("Empty Frame can't get pins");
   }
 
   public FrameStatus getFrameStatus() {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("Empty Frame can't get frameStatus");
   }
 
   @Override
   public FrameDTO createDTO() {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("Empty Frame can't create DTO");
   }
 
   @Override
