@@ -7,7 +7,7 @@ public class LaneIndex {
 
   public LaneIndex(int maxIndex) {
     if (maxIndex < 0) {
-      throw new IllegalArgumentException("maxIndex는 0보다 작을 수 없습니다.");
+      throw new LaneIndexLowerThanZeroException();
     }
 
     this.maxIndex = maxIndex;

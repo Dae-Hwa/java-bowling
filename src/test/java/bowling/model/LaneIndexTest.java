@@ -8,7 +8,7 @@ class LaneIndexTest {
 
   @Test
   void init_fail() {
-    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+    assertThatExceptionOfType(LaneIndexLowerThanZeroException.class).isThrownBy(() -> {
       new LaneIndex(-1);
     });
   }
