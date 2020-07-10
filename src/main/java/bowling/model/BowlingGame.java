@@ -1,54 +1,54 @@
 package bowling.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BowlingGame {
 
-  public final static int MAX_NUMBER_OF_FRAMES = 10;
+  List<Lane> lanes;
+  private int currentLaneIndex;
 
-  private final Frames frames = new Frames();
-  private final PlayerName playerName;
-
-  private BowlingGame(PlayerName playerName) {
-    this.playerName = playerName;
+  public BowlingGame(List<Lane> lanes) {
+    this.lanes = lanes;
   }
 
-  public static BowlingGame createWith(String playerName) {
-    return new BowlingGame(new PlayerName(playerName));
+  public static BowlingGame createWith(List<String> playerNames) {
+    return new BowlingGame(playerNames.stream()
+        .map(playerName -> Lane.createWith(playerName))
+        .collect(Collectors.toList()));
   }
 
-  public String getPlayerName() {
-    return playerName.getValue();
+  public int getLaneSize() {
+    return lanes.size();
   }
 
-  public List<FrameDTO> getFramesDTO() {
-    return new FramesDTO(frames.getFrames()).getFrames();
+  public String getCurrentPlayerName() {
+    return lanes.get(currentLaneIndex).getPlayerName();
   }
 
-  public int getCurrentFrameNumber() {
-    if (frames.isCurrentFrameOver()) {
-      return frames.getSize() + 1;
+  public void roll(int knockDownNumber) {
+    Lane currentLane = lanes.get(currentLaneIndex);
+
+    currentLane.roll(knockDownNumber);
+
+    if (Lane.MAX_NUMBER_OF_FRAMES < currentLane.getCurrentFrameNumber() && currentLane.requiredNormalFrame()) {
+      return;
     }
 
-    return frames.getSize();
-  }
-
-  public List<Score> getScores() {
-    return frames.getScores();
-  }
-
-  public void roll(int number) {
-    frames.roll(number);
-  }
-
-  public boolean requiredNormalFrame() {
-    return !frames.isOver();
+    if (currentLane.isCurrentFrameOver()) {
+      // 도메인 만들어서 이동
+      currentLaneIndex++;
+      if (lanes.size() <= currentLaneIndex) {
+        currentLaneIndex = 0;
+      }
+    }
   }
 
   @Override
   public String toString() {
     return "BowlingGame{" +
-        "frames2=" + frames +
+        "lanes=" + lanes +
+        ", currentLaneIndex=" + currentLaneIndex +
         '}';
   }
 }

@@ -54,13 +54,17 @@ public class Frames {
     return frames.getLast().isOver();
   }
 
+  public boolean isCurrentFrameBonus() {
+    return frames.getLast().createDTO().isBonusFrame();
+  }
+
   public boolean isOver() {
     return frames.getLast().isFinished();
   }
 
   public List<Score> getScores() {
     return frames.stream()
-        .limit(BowlingGame.MAX_NUMBER_OF_FRAMES)
+        .limit(Lane.MAX_NUMBER_OF_FRAMES)
         .map(frame -> frame.getScore())
         .collect(Collectors.toList());
   }

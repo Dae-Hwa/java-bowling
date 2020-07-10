@@ -2,7 +2,7 @@ package bowling.view;
 
 import static bowling.model.Symbols.*;
 
-import bowling.model.BowlingGame;
+import bowling.model.Lane;
 import bowling.model.FrameDTO;
 import bowling.model.Score;
 import java.util.List;
@@ -44,7 +44,7 @@ public class BowlingView {
         .append(BAR);
 
     frameDTOs.stream()
-        .limit(BowlingGame.MAX_NUMBER_OF_FRAMES - 1)
+        .limit(Lane.MAX_NUMBER_OF_FRAMES - 1)
         .forEach(frameDTO -> {
           sb.append(wrappingWithSpaces(frameDTO.getFrameResult()))
               .append(BAR);
@@ -60,7 +60,7 @@ public class BowlingView {
 
   private static String getLastFrameMsg(List<FrameDTO> frameDTOs) {
     StringBuilder sb = new StringBuilder(
-        frameDTOs.get(BowlingGame.MAX_NUMBER_OF_FRAMES - 1).getFrameResult());
+        frameDTOs.get(Lane.MAX_NUMBER_OF_FRAMES - 1).getFrameResult());
 
     frameDTOs.stream()
         .filter(FrameDTO::isBonusFrame)

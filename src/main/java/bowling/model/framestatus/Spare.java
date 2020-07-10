@@ -3,7 +3,7 @@ package bowling.model.framestatus;
 import static bowling.model.Symbols.*;
 
 import bowling.model.BonusFrame;
-import bowling.model.BowlingGame;
+import bowling.model.Lane;
 import bowling.model.Frame;
 import bowling.model.KnockedDownPins;
 import bowling.model.NormalFrame;
@@ -22,7 +22,7 @@ public class Spare implements FrameStatus {
   }
 
   private Frame createFrameBy(int currentIndex) {
-    if (currentIndex == BowlingGame.MAX_NUMBER_OF_FRAMES - 1) {
+    if (currentIndex == Lane.MAX_NUMBER_OF_FRAMES - 1) {
       return new BonusFrame(Bonus.createHasFinished());
     }
 
