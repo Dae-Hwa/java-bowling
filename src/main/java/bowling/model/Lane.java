@@ -17,10 +17,6 @@ public class Lane {
     return new Lane(new PlayerName(playerName));
   }
 
-  public static Lane createWith(PlayerName playerName) {
-    return new Lane(new PlayerName(playerName.getValue()));
-  }
-
   public String getPlayerName() {
     return playerName.getValue();
   }
@@ -51,10 +47,6 @@ public class Lane {
 
   public boolean isCurrentFrameOver() {
     return frames.isCurrentFrameOver();
-  }
-
-  public boolean isCurrentFrameBonus() {
-    return frames.isCurrentFrameBonus();
   }
 
   @Override

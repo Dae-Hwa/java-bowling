@@ -54,10 +54,6 @@ public class Frames {
     return frames.getLast().isOver();
   }
 
-  public boolean isCurrentFrameBonus() {
-    return frames.getLast().createDTO().isBonusFrame();
-  }
-
   public boolean isOver() {
     return frames.getLast().isFinished();
   }

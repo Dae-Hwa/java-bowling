@@ -13,7 +13,7 @@ public class BowlingGame {
     this.lanes = lanes;
   }
 
-  public static BowlingGame createWith(List<PlayerName> playerNames) {
+  public static BowlingGame createWith(List<String> playerNames) {
     return new BowlingGame(playerNames.stream()
         .map(playerName -> Lane.createWith(playerName))
         .collect(Collectors.toList()));
@@ -52,10 +52,6 @@ public class BowlingGame {
 
   public List<Lane> getLanes() {
     return Collections.unmodifiableList(lanes);
-  }
-
-  public int getCurrentFrameNumber() {
-    return lanes.get(currentLaneIndex).getCurrentFrameNumber();
   }
 
   @Override
