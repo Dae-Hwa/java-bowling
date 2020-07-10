@@ -24,15 +24,27 @@ public class BowlingView {
     System.out.print(currentPlayer + "'s turn : ");
   }
 
-  public static void printScoreBoardHeader() {
+  public static void printScoreBoard(List<Lane> lanes) {
+    printScoreBoardHeader();
+
+    printScoreBoardBody(lanes);
+
+    System.out.println();
+  }
+
+  private static void printScoreBoardHeader() {
     System.out.println(SCORE_BOARD_UPPER);
   }
 
-  public static void printScoreBoard(String playerName, List<FrameDTO> framesDTO) {
-    System.out.println(getFrameMsgBy(playerName, framesDTO, framesDTO.size()));
+  private static void printScoreBoardBody(List<Lane> lanes) {
+    lanes.forEach(lane -> {
+      printKnockDownNumberWithName(lane.getPlayerName(), lane.getFramesDTO());
+      printScores(lane.getScores());
+    });
   }
 
-  private static String getFrameMsgBy(String playerName, List<FrameDTO> frameDTOs, int endpoint) {
+
+  private static void printKnockDownNumberWithName(String playerName, List<FrameDTO> frameDTOs) {
     StringBuilder sb = new StringBuilder();
 
     sb.append(BAR)
@@ -46,12 +58,12 @@ public class BowlingView {
               .append(BAR);
         });
 
-    if (10 <= endpoint) {
+    if (10 <= frameDTOs.size()) {
       sb.append(getLastFrameMsg(frameDTOs))
           .append(BAR);
     }
 
-    return sb.toString();
+    System.out.println(sb.toString());
   }
 
   private static String getLastFrameMsg(List<FrameDTO> frameDTOs) {
@@ -68,7 +80,7 @@ public class BowlingView {
     return wrappingWithSpaces(sb.toString());
   }
 
-  public static void printScores(List<Score> scores) {
+  private static void printScores(List<Score> scores) {
     StringBuilder sb = new StringBuilder();
 
     sb.append(BAR)
@@ -109,9 +121,5 @@ public class BowlingView {
     }
 
     return sb.toString();
-  }
-
-  public static void printLineSeparator() {
-    System.out.print(System.lineSeparator());
   }
 }
