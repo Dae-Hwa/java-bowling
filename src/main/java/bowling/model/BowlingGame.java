@@ -1,57 +1,51 @@
 package bowling.model;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BowlingGame {
 
-  List<Lane> lanes;
+  Lanes lanes;
   private int currentLaneIndex;
 
-  public BowlingGame(List<Lane> lanes) {
+  private BowlingGame(Lanes lanes) {
     this.lanes = lanes;
   }
 
   public static BowlingGame createWith(List<String> playerNames) {
-    return new BowlingGame(playerNames.stream()
-        .map(playerName -> Lane.createWith(playerName))
-        .collect(Collectors.toList()));
+    return new BowlingGame(Lanes.createWith(playerNames));
   }
 
-  public int getLaneSize() {
-    return lanes.size();
+  public int getNumberOfPlayers() {
+    return lanes.getSize();
   }
 
   public String getCurrentPlayerName() {
-    return lanes.get(currentLaneIndex).getPlayerName();
+    return lanes.getPlayerNameAt(currentLaneIndex);
   }
 
   public void roll(int knockDownNumber) {
-    Lane currentLane = lanes.get(currentLaneIndex);
+    lanes.rollBy(knockDownNumber, currentLaneIndex);
 
-    currentLane.roll(knockDownNumber);
-
-    if (Lane.MAX_NUMBER_OF_FRAMES < currentLane.getCurrentFrameNumber() && currentLane
-        .isNotFinished()) {
+    if (Lane.MAX_NUMBER_OF_FRAMES < lanes.getFrameNumberAt(currentLaneIndex) && lanes
+        .isNotFinishedAt(currentLaneIndex)) {
       return;
     }
 
-    if (currentLane.isCurrentFrameOver()) {
+    if (lanes.isFrameOverAt(currentLaneIndex)) {
       // 도메인 만들어서 이동
       currentLaneIndex++;
-      if (lanes.size() <= currentLaneIndex) {
+      if (lanes.getSize() <= currentLaneIndex) {
         currentLaneIndex = 0;
       }
     }
   }
 
   public boolean isNotFinished() {
-    return lanes.stream().anyMatch(lane -> lane.isNotFinished());
+    return lanes.isNotFinished();
   }
 
   public List<Lane> getLanes() {
-    return Collections.unmodifiableList(lanes);
+    return lanes.getLanes();
   }
 
   @Override

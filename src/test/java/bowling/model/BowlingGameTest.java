@@ -18,7 +18,7 @@ class BowlingGameTest {
   void createBy(List<String> playerNames) {
     BowlingGame bowlingGame = BowlingGame.createWith(playerNames);
 
-    assertThat(bowlingGame.getLaneSize()).isEqualTo(playerNames.size());
+    assertThat(bowlingGame.getNumberOfPlayers()).isEqualTo(playerNames.size());
   }
 
   static Stream<Arguments> createBy() {
