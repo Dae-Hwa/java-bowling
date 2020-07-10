@@ -17,6 +17,10 @@ public class Lane {
     return new Lane(new PlayerName(playerName));
   }
 
+  public static Lane createWith(PlayerName playerName) {
+    return new Lane(new PlayerName(playerName.getValue()));
+  }
+
   public String getPlayerName() {
     return playerName.getValue();
   }
@@ -41,7 +45,7 @@ public class Lane {
     frames.roll(number);
   }
 
-  public boolean requiredNormalFrame() {
+  public boolean isNotFinished() {
     return !frames.isOver();
   }
 

@@ -15,7 +15,7 @@ class BowlingGameTest {
 
   @ParameterizedTest
   @MethodSource("createBy")
-  void createBy(List<String> playerNames) {
+  void createBy(List<PlayerName> playerNames) {
     BowlingGame bowlingGame = BowlingGame.createWith(playerNames);
 
     assertThat(bowlingGame.getLaneSize()).isEqualTo(playerNames.size());
@@ -24,14 +24,18 @@ class BowlingGameTest {
   static Stream<Arguments> createBy() {
     return Stream.of(
         arguments(
-            Arrays.asList("a", "b", "c")
+            Arrays.asList(
+                new PlayerName("a"),
+                new PlayerName("b"),
+                new PlayerName("c")
+            )
         )
     );
   }
 
   @ParameterizedTest
   @MethodSource("getCurrentPlayerName")
-  void getCurrentPlayerName(List<String> playerNames,
+  void getCurrentPlayerName(List<PlayerName> playerNames,
       List<Integer> knockDownNumbers,
       List<String> expectedPlayerNames) {
     BowlingGame bowlingGame = BowlingGame.createWith(playerNames);
@@ -41,15 +45,17 @@ class BowlingGameTest {
           .isEqualTo(expectedPlayerNames.get(i));
 
       bowlingGame.roll(knockDownNumbers.get(i));
-
     }
-
   }
 
   static Stream<Arguments> getCurrentPlayerName() {
     return Stream.of(
         arguments(
-            Arrays.asList("a", "b", "c"),
+            Arrays.asList(
+                new PlayerName("a"),
+                new PlayerName("b"),
+                new PlayerName("c")
+            ),
             Arrays.asList(1, 1, 10, 1, 9),
             Arrays.asList("a", "a", "b", "c", "c")
         )
@@ -58,7 +64,7 @@ class BowlingGameTest {
 
   @ParameterizedTest
   @MethodSource("getCurrentPlayerName_bonus")
-  void getCurrentPlayerName_bonus(List<String> playerNames,
+  void getCurrentPlayerName_bonus(List<PlayerName> playerNames,
       List<Integer> knockDownNumbers,
       String expectedPlayerName) {
     BowlingGame bowlingGame = BowlingGame.createWith(playerNames);
@@ -73,7 +79,11 @@ class BowlingGameTest {
   static Stream<Arguments> getCurrentPlayerName_bonus() {
     return Stream.of(
         arguments(
-            Arrays.asList("a", "b", "c"),
+            Arrays.asList(
+                new PlayerName("a"),
+                new PlayerName("b"),
+                new PlayerName("c")
+            ),
             Arrays.asList(
                 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
                 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
@@ -82,12 +92,16 @@ class BowlingGameTest {
             "b"
         ),
         arguments(
-            Arrays.asList("a", "b", "c"),
+            Arrays.asList(
+                new PlayerName("a"),
+                new PlayerName("b"),
+                new PlayerName("c")
+            ),
             Arrays.asList(
                 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
                 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
                 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-                1,1
+                1, 1
             ),
             "c"
         )
