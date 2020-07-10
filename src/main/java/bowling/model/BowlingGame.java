@@ -5,10 +5,11 @@ import java.util.List;
 public class BowlingGame {
 
   Lanes lanes;
-  private int currentLaneIndex;
+  private final LaneIndex laneIndex;
 
   private BowlingGame(Lanes lanes) {
     this.lanes = lanes;
+    this.laneIndex = new LaneIndex(lanes.getSize() - 1);
   }
 
   public static BowlingGame createWith(List<String> playerNames) {
@@ -20,23 +21,19 @@ public class BowlingGame {
   }
 
   public String getCurrentPlayerName() {
-    return lanes.getPlayerNameAt(currentLaneIndex);
+    return lanes.getPlayerNameAt(laneIndex.getCurrentIndex());
   }
 
   public void roll(int knockDownNumber) {
-    lanes.rollBy(knockDownNumber, currentLaneIndex);
+    lanes.rollBy(knockDownNumber, laneIndex.getCurrentIndex());
 
-    if (Lane.MAX_NUMBER_OF_FRAMES < lanes.getFrameNumberAt(currentLaneIndex) && lanes
-        .isNotFinishedAt(currentLaneIndex)) {
+    if (Lane.MAX_NUMBER_OF_FRAMES < lanes.getFrameNumberAt(laneIndex.getCurrentIndex()) && lanes
+        .isNotFinishedAt(laneIndex.getCurrentIndex())) {
       return;
     }
 
-    if (lanes.isFrameOverAt(currentLaneIndex)) {
-      // 도메인 만들어서 이동
-      currentLaneIndex++;
-      if (lanes.getSize() <= currentLaneIndex) {
-        currentLaneIndex = 0;
-      }
+    if (lanes.isFrameOverAt(laneIndex.getCurrentIndex())) {
+      laneIndex.next();
     }
   }
 
@@ -52,7 +49,7 @@ public class BowlingGame {
   public String toString() {
     return "BowlingGame{" +
         "lanes=" + lanes +
-        ", currentLaneIndex=" + currentLaneIndex +
+        ", laneIndex=" + laneIndex +
         '}';
   }
 }

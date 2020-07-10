@@ -18,7 +18,6 @@ public class Lanes {
         .collect(Collectors.toList()));
   }
 
-
   public int getSize() {
     return lanes.size();
   }
