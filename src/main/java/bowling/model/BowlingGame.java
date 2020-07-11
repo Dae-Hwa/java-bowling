@@ -16,10 +16,6 @@ public class BowlingGame {
     return new BowlingGame(Lanes.createWith(playerNames));
   }
 
-  public int getNumberOfPlayers() {
-    return lanes.getSize();
-  }
-
   public String getCurrentPlayerName() {
     return lanes.getPlayerNameAt(laneIndex.getCurrentIndex());
   }

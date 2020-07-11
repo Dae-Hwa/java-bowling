@@ -14,20 +14,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 class BowlingGameTest {
 
   @ParameterizedTest
-  @MethodSource("createBy")
-  void createBy(List<String> playerNames) {
-    BowlingGame bowlingGame = BowlingGame.createWith(playerNames);
-
-    assertThat(bowlingGame.getNumberOfPlayers()).isEqualTo(playerNames.size());
-  }
-
-  static Stream<Arguments> createBy() {
-    return Stream.of(
-        arguments(Arrays.asList("a","b","c"))
-    );
-  }
-
-  @ParameterizedTest
   @MethodSource("getCurrentPlayerName")
   void getCurrentPlayerName(List<String> playerNames,
       List<Integer> knockDownNumbers,
